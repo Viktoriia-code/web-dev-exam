@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext } from "react";
 
 // pages & components
 import Navbar from "./components/Navbar";
@@ -10,26 +10,23 @@ import EditBookPage from "./pages/EditBookPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import { AuthContext } from "./context/AuthContext";
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user && user.token ? true : false;
-  });
+  const { isAuthenticated } = useContext(AuthContext);
   
-
   return (
     <div className="App">
       <BrowserRouter>
-      <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
+      <Navbar />
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/books/:id" element={<BookPage isAuthenticated={isAuthenticated} />} />
+            <Route path="/books/:id" element={<BookPage />} />
             <Route
               path="/books/add-book"
               element={isAuthenticated ? <AddBookPage /> : <Navigate to="/signup" />}
-            />           
+            />
             <Route
               path="/edit-book/:id"
               element={isAuthenticated ? <EditBookPage /> : <Navigate to="/signup" />}
@@ -40,7 +37,7 @@ const App = () => {
                 isAuthenticated ? (
                   <Navigate to="/" />
                 ) : (
-                  <Signup setIsAuthenticated={setIsAuthenticated} />
+                  <Signup />
                 )
               }
             />
@@ -50,7 +47,7 @@ const App = () => {
                 isAuthenticated ? (
                   <Navigate to="/" />
                 ) : (
-                  <Login setIsAuthenticated={setIsAuthenticated} />
+                  <Login />
                 )
               }
             />

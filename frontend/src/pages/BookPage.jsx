@@ -1,7 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
-const BookPage = ({ isAuthenticated }) => {
+const BookPage = () => {
+  const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
   const { id } = useParams();
   const [book, setBook] = useState(null);
@@ -72,13 +74,8 @@ const BookPage = ({ isAuthenticated }) => {
           <p>Publisher: {book.publisher}</p>
           <p>Genre: {book.genre}</p>
           <p>Availability: {book && book.availability ? (book.availability.isAvailable ? 'Yes' : 'No') : 'Unknown'}</p>
-          {/* Conditionally render Due Date and Borrower if the book is not available */}
-          {!book.availability.isAvailable && (
-            <>
-              <p>Due Date: {book.availability.dueDate ? new Date(book.availability.dueDate).toLocaleDateString() : 'N/A'}</p>
-              <p>Borrower: {book.availability.borrower || 'N/A'}</p>
-            </>
-          )}
+          <p>Due Date: {book.availability.dueDate ? new Date(book.availability.dueDate).toLocaleDateString() : 'N/A'}</p>
+          <p>Borrower: {book.availability.borrower || 'N/A'}</p>
 
           {isAuthenticated && (
             <>
