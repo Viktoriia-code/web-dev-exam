@@ -24,9 +24,9 @@ app.use(customMiddleware.unknownEndpoint);
 app.use(customMiddleware.errorHandler);
 
 // connect to db
-console.log('connecting to', process.env.MONGO_URI)
+console.log('connecting to', process.env.TEST_MONGO_URI)
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.TEST_MONGO_URI)
   .then(() => {
     console.log("connected to db");
   })
