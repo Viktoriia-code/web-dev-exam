@@ -17,6 +17,7 @@ const signupUser = async (req, res) => {
     name,
     email,
     password,
+    role
   } = req.body;
   try {
     if (
@@ -44,6 +45,7 @@ const signupUser = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      role,
     });
 
     if (user) {

@@ -10,6 +10,7 @@ const BookListings = ({ books }) => {
             <h2>{book.title}</h2>
           </Link>
           <p>Author: {book.author}</p>
+          <p>Genre: {book.genre}</p>
           <p>Availability: {book && book.availability ? (book.availability.isAvailable ? 'Yes' : 'No') : 'Unknown'}</p>
         </div>
       ))}

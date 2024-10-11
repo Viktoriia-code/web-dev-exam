@@ -5,7 +5,10 @@ const AddBookPage = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [isbn, setISBN] = useState("");
+  const [publisher, setPublisher] = useState("");
+  const [genre, setGenre] = useState("");
   const [isAvailable, setIsAvailable] = useState(false);
+  const [dueDate, setDueDate] = useState("");
   const [borrower, setBorrower] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -41,8 +44,11 @@ const AddBookPage = () => {
       title,
       author,
       isbn,
+      publisher,
+      genre,
       availability: {
         isAvailable,
+        dueDate,
         borrower,
       },
     };
@@ -85,6 +91,20 @@ const AddBookPage = () => {
           value={isbn}
           onChange={(e) => setISBN(e.target.value)}
         />
+        <label>Publisher:</label>
+        <input
+          type="text"
+          required
+          value={publisher}
+          onChange={(e) => setPublisher(e.target.value)}
+        />
+        <label>Genre:</label>
+        <input
+          type="text"
+          required
+          value={genre}
+          onChange={(e) => setGenre(e.target.value)}
+        />
         <label>Availability:</label>
         <select
           value={isAvailable ? "Yes" : "No"}
@@ -93,6 +113,12 @@ const AddBookPage = () => {
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>
+        <label>Due Date:</label>
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+        />
         <label>borrower:</label>
         <input
           type="text"

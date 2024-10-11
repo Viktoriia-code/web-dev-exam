@@ -7,6 +7,7 @@ const Signup = ({ setIsAuthenticated }) => {
   const name = useField("text");  
   const email = useField("email");
   const password = useField("password");
+  const role = useField("text");
 
   const { signup, error } = useSignup("/api/users/signup");
 
@@ -16,6 +17,7 @@ const Signup = ({ setIsAuthenticated }) => {
       email: email.value,
       password: password.value,
       name: name.value,
+      role: role.value
     });
     if (!error) {
       console.log("success");
@@ -34,6 +36,8 @@ const Signup = ({ setIsAuthenticated }) => {
         <input {...email} />
         <label>Password:</label>
         <input {...password} />
+        <label>Role:</label>
+        <input {...role} />
         <button>Sign up</button>
       </form>
     </div>
