@@ -13,7 +13,10 @@ const EditBookPage = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [isbn, setISBN] = useState("");
+  const [publisher, setPublisher] = useState("");
+  const [genre, setGenre] = useState("");
   const [isAvailable, setIsAvailable] = useState(false);
+  const [dueDate, setDueDate] = useState("");
   const [borrower, setBorrower] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -55,7 +58,10 @@ const EditBookPage = () => {
         setTitle(data.title);
         setAuthor(data.author);
         setISBN(data.isbn);
+        setPublisher(data.publisher);
+        setGenre(data.genre);
         setIsAvailable(data.availability.isAvailable);
+        setDueDate(data.availability.dueDate);
         setBorrower(data.availability.borrower);
       } catch (error) {
         console.error("Failed to fetch book:", error);
@@ -77,8 +83,11 @@ const EditBookPage = () => {
       title,
       author,
       isbn,
+      publisher,
+      genre,
       availability: {
         isAvailable,
+        dueDate,
         borrower,
       },
     };
@@ -126,6 +135,20 @@ const EditBookPage = () => {
             value={isbn}
             onChange={(e) => setISBN(e.target.value)}
           />
+          <label>Publisher:</label>
+          <input
+            type="text"
+            required
+            value={isbn}
+            onChange={(e) => setPublisher(e.target.value)}
+          />
+          <label>Genre:</label>
+          <input
+            type="text"
+            required
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+          />
           <label>Availability:</label>
           <select
             value={isAvailable ? "Yes" : "No"}
@@ -134,6 +157,12 @@ const EditBookPage = () => {
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>
+          <label>Due Date:</label>
+          <input
+            type="date"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+          />
           <label>borrower:</label>
           <input
             type="text"

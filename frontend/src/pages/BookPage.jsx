@@ -69,9 +69,16 @@ const BookPage = ({ isAuthenticated }) => {
           <h2>{book.title}</h2>
           <p>Author: {book.author}</p>
           <p>ISBN: {book.isbn}</p>
+          <p>Publisher: {book.publisher}</p>
+          <p>Genre: {book.genre}</p>
           <p>Availability: {book && book.availability ? (book.availability.isAvailable ? 'Yes' : 'No') : 'Unknown'}</p>
-          <p>Borrower: {book.availability.borrower}</p>
-
+          {/* Conditionally render Due Date and Borrower if the book is not available */}
+          {!book.availability.isAvailable && (
+            <>
+              <p>Due Date: {book.availability.dueDate ? new Date(book.availability.dueDate).toLocaleDateString() : 'N/A'}</p>
+              <p>Borrower: {book.availability.borrower || 'N/A'}</p>
+            </>
+          )}
 
           {isAuthenticated && (
             <>

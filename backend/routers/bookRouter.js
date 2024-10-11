@@ -11,7 +11,7 @@ router.get('/', getAllBooks);
 router.get('/:id', getBookById);
 
 // require auth for the rest of the routes
-router.use(requireAuth)
+router.use(requireAuth);
 
 // POST a new Book
 router.post('/', createBook);

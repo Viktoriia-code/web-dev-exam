@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const bookSchema = new mongoose.Schema({
+/*const bookSchema = new mongoose.Schema({
   title: { type: String, required: true },
   author: { type: String, required: true },
   isbn: { type: String, required: true },
@@ -9,9 +9,22 @@ const bookSchema = new mongoose.Schema({
     borrower: { type: String },
   },
   user_id: { type: mongoose.Schema.Types.ObjectId, required: true }
-}, { timestamps: true });
+}, { timestamps: true });*/
 
-//add  virtual field id
+const bookSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  author: { type: String, required: true },
+  isbn: { type: String, required: true },
+  publisher: { type: String, required: true },
+  genre: { type: String, required: true },
+  availability: {
+    isAvailable: { type: Boolean, required: true },
+    dueDate: { type: Date },
+    borrower: { type: String }
+  }
+}, { timestamps: true, versionKey: false });
+
+//add virtual field id
 bookSchema.set('toJSON', {
   virtuals: true,
   transform: (doc, ret) => {
@@ -19,8 +32,5 @@ bookSchema.set('toJSON', {
     return ret;
   }
 });
-    
-    
 
 module.exports = mongoose.model('Book', bookSchema);
-

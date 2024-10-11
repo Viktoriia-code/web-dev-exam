@@ -10,6 +10,8 @@ const books = [
     "title": "Title 1",
     "author": "Author 1",
     "isbn": "978-3-16-148410-0",
+    "publisher": "Publisher 1",
+    "genre": "Genre 1",
     "availability": {
       "isAvailable": true,
       "borrower": "Borrower 1"
@@ -19,6 +21,8 @@ const books = [
     "title": "Title 1",
     "author": "Author 2",
     "isbn": "978-1-4028-9462-6",
+    "publisher": "Publisher 2",
+    "genre": "Genre 2",
     "availability": {
       "isAvailable": false,
       "borrower": "Borrower 2"
@@ -66,6 +70,8 @@ describe("Given there are initially some books saved", () => {
   title: "test title",
   author: "test author",
   isbn: "test isbn",
+  publisher: "test publisher",
+  genre: "test genre",
   availability: {
     isAvailable: false,
     borrower: "test borrower",
@@ -93,6 +99,8 @@ describe("Given there are initially some books saved", () => {
       title: "test title",
   author: "test author",
   isbn: "test isbn",
+  publisher: "test publisher",
+  genre: "test genre",
   availability: {
     isAvailable: false,
     borrower: "test borrower",
