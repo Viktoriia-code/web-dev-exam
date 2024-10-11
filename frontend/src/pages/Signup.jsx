@@ -1,5 +1,5 @@
 import useField from "../hooks/useField";
-import useSignup from "../hooks/useSignup";
+import useRegister from "../hooks/useRegister";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -12,16 +12,17 @@ const Signup = () => {
   const password = useField("password");
   const role = useField("text");
 
-  const { signup, error } = useSignup("/api/users/signup");
+  const { register, error } = useRegister("/api/users");
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    await signup({
+    await register({
       email: email.value,
       password: password.value,
       name: name.value,
       role: role.value
-    });
+    }, "signup");
+
     if (!error) {
       console.log("success");
       setIsAuthenticated(true);
@@ -43,6 +44,7 @@ const Signup = () => {
         <input {...role} />
         <button>Sign up</button>
       </form>
+      {error && <p className="error">{error}</p>}
     </div>
   );
 };

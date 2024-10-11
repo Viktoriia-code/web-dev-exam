@@ -53,7 +53,7 @@ const deleteBook = async (req, res) => {
   const { id } = req.params;
   try {
     const user_id = req.user._id;
-    const book = await Book.findByIdAndDelete({ _id: id, user_id: user_id }); // User can only delete their own books
+    const book = await Book.findOneAndDelete({ _id: id, user_id: user_id }); // User can only delete their own books
     // const book = await Book.findByIdAndDelete({ _id: id,});
     if (!book) {
       return res.status(404).json({ message: 'Book not found' });

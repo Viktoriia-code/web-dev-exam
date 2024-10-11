@@ -1,5 +1,5 @@
 import useField from "../hooks/useField";
-import useLogin from "../hooks/useLogin";
+import useRegister from "../hooks/useRegister";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
@@ -10,11 +10,11 @@ const Login = () => {
   const email = useField("email");
   const password = useField("password");
 
-  const { login, error } = useLogin("/api/users/login");
+  const { register, error } = useRegister("/api/users");
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    await login({ email: email.value, password: password.value });
+    await register({ email: email.value, password: password.value }, "login");
     if (!error) {
       console.log("success");
       setIsAuthenticated(true);
@@ -33,6 +33,7 @@ const Login = () => {
         <input {...password} />
         <button>Sign up</button>
       </form>
+      {error && <p className="error">{error}</p>}
     </div>
   );
 };

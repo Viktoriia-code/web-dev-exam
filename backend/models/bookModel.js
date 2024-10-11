@@ -10,7 +10,8 @@ const bookSchema = new mongoose.Schema({
     isAvailable: { type: Boolean, required: true },
     dueDate: { type: Date },
     borrower: { type: String }
-  }
+  },
+  user_id: { type: mongoose.Schema.Types.ObjectId, required: true }
 }, { timestamps: true, versionKey: false });
 
 //add virtual field id
